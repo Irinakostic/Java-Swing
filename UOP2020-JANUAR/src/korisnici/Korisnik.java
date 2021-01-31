@@ -2,7 +2,14 @@ package korisnici;
 
 public abstract class Korisnik {
 	
-	private int id;
+	
+	public enum Pol {
+		ZENSKI, 	// 0
+		MUSKI		// 1
+
+	}
+	
+	private String id;
 	private String ime;
 	private String prezime;
 	private int JMBG;
@@ -18,7 +25,7 @@ public abstract class Korisnik {
 
 
 	
-	public Korisnik(int id, String ime, String prezime, int jMBG, Pol pol, String adresa, int brMobilnog,
+	public Korisnik(String id, String ime, String prezime, int jMBG, Pol pol, String adresa, int brMobilnog,
 			String korisnickoIme, String lozinka, boolean obrisan) {
 		super();
 		this.id = id;
@@ -35,13 +42,13 @@ public abstract class Korisnik {
 
 
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
 
 
-	public void setId(int id) {
+	public void setId( String id) {
 		this.id = id;
 	}
 

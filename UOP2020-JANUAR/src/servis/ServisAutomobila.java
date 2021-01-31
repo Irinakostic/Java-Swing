@@ -6,7 +6,13 @@ import korisnici.Serviser;
 
 public class ServisAutomobila {
 	
-	private int id;
+	public enum StatusServisa {
+		otkazan, //0
+		zakazan, //1
+}
+
+	
+	private  String id;
 	private Automobil automobilSA;
 	private Serviser serviserSA;
 	private int Termin;
@@ -16,7 +22,7 @@ public class ServisAutomobila {
 	private boolean obrisan;
 	
 	
-	public ServisAutomobila(int id, Automobil automobilSA, Serviser serviserSA, int termin, String opis,
+	public ServisAutomobila( String id, Automobil automobilSA, Serviser serviserSA, int termin, String opis,
 			ArrayList<Deo> listaDelova, StatusServisa statusServisa, boolean obrisan) {
 		this.id = id;
 		this.automobilSA = automobilSA;
@@ -29,12 +35,12 @@ public class ServisAutomobila {
 	}
 
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId( String id) {
 		this.id = id;
 	}
 

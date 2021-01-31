@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class ServisnaKnjizica {
 	
-	private int id;
+	private  String id;
 	private Automobil automobilSK;
 	private ArrayList<ServisAutomobila>listaServisa;
 	private boolean obrisan;
 
 	
-	public ServisnaKnjizica(int id, Automobil automobilSK, ArrayList<ServisAutomobila> listaServisa,
+	public ServisnaKnjizica( String id, Automobil automobilSK, ArrayList<ServisAutomobila> listaServisa,
 			boolean obrisan) {
 		super();
 		this.id = id;
@@ -22,12 +22,12 @@ public class ServisnaKnjizica {
 
 
 
-	public int getId() {
+	public  String getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId( String id) {
 		this.id = id;
 	}
 

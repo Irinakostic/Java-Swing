@@ -1,0 +1,1 @@
+1|nikola|nikolic|2456875|0|adresaS|06554564|nikolaS|12345|1000.0|1|false

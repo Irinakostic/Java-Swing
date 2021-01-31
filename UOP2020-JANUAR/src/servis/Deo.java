@@ -2,17 +2,19 @@ package servis;
 
 public class Deo {
 	
-	private int id;
+
+	
+	private  String id;
 	private Marka marka;
 	private Model model;
 	private String nazivDela;
-	private float cena;
+	private double cena;
 	private boolean obrisan;
 	
 	
 	
 
-	public Deo(int id, Marka marka, Model model, String nazivDela, float cena, boolean obrisan) {
+	public Deo( String id, Marka marka, Model model, String nazivDela, double cena, boolean obrisan) {
 		super();
 		this.id = id;
 		this.marka = marka;
@@ -23,12 +25,12 @@ public class Deo {
 	}
 
 
-	public int getId() {
+	public  String getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId( String id) {
 		this.id = id;
 	}
 
@@ -63,12 +65,13 @@ public class Deo {
 	}
 
 
-	public float getCena() {
+
+	public double getCena() {
 		return cena;
 	}
 
 
-	public void setCena(float cena) {
+	public void setCena(double cena) {
 		this.cena = cena;
 	}
 

@@ -5,7 +5,16 @@ import korisnici.Musterija;
 public class Automobil {
 	
 	
-	private int id;
+	
+	public enum VrstaGoriva {
+		BMB98, //0
+		BMB95, //1
+		EVRODIZEL //2
+}
+
+	
+	
+	private  String id;
 	private Musterija vlasnik;
 	private Marka marka;
 	private Model model;
@@ -18,7 +27,7 @@ public class Automobil {
 	
 	
 
-	public Automobil(int id, Musterija vlasnik, Marka marka, Model model, int godProizvodnje, int zapreminaMotora,
+	public Automobil( String id, Musterija vlasnik, Marka marka, Model model, int godProizvodnje, int zapreminaMotora,
 			int snagaMotora, VrstaGoriva vrstaGoriva, boolean obrisan) {
 		super();
 		this.id = id;
@@ -33,12 +42,12 @@ public class Automobil {
 	}
 
 
-	public int getId() {
+	public  String getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId( String id) {
 		this.id = id;
 	}
 

@@ -1,0 +1,1 @@
+1|marko|markovic|2456875|0|adresaM|06554564|markoM|12345|false|100
