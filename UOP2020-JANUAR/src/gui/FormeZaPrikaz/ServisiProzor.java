@@ -15,6 +15,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import guiFromeZaDodavanjeiIzmene.ServisForma;
+import servis.Deo;
 import servis.ServisAutomobila;
 import servisAutomobila.ServisA;
 
@@ -53,22 +54,22 @@ public class ServisiProzor extends JFrame {
 		mainToolBar.add(btnDelete);
 		add(mainToolBar, BorderLayout.NORTH);
 		
-		String[] zaglavlja = new String[]{"Id","Auto","Serviser","Termin","Opis","Delovi","Status servisa"};
+		String[] zaglavlja = new String[]{"Id","Auto","Serviser","Termin","Opis","Delovi","Status servisa","Delovi"};
 		
 		Object[][] sadrzaj = new Object[citanje.sviNeobrisaniServisi().size()][zaglavlja.length];
 		
 		for(int i=0; i<citanje.sviNeobrisaniServisi().size();i++) {
 			
 			ServisAutomobila servis = citanje.sviNeobrisaniServisi().get(i);
-
+			Deo deo = citanje.pronadjiDeoS(servis);
 			
 			sadrzaj[i][0] = servis.getId();
 			sadrzaj[i][1] = servis.getAutomobilSA().getMarka()+" "+servis.getAutomobilSA().getModel();
 			sadrzaj[i][2] = servis.getServiserSA().getIme()+" "+servis.getServiserSA().getPrezime();
 			sadrzaj[i][3] = servis.getTermin();
 			sadrzaj[i][4] = servis.getOpis();
-			sadrzaj[i][5] = servis.getListaDelova();
-			sadrzaj[i][6] = servis.getStatusServisa();
+			sadrzaj[i][5] = servis.getStatusServisa();
+			sadrzaj[i][6] = deo == null ? "--" : deo.getNazivDela();
 	
 		
 		tableModel = new DefaultTableModel(sadrzaj,zaglavlja);

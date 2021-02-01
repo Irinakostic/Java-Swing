@@ -12,8 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import korisnici.Serviser;
 
+import korisnici.Serviser;
+import main.Main;
 import net.miginfocom.swing.MigLayout;
 import servis.Automobil;
 import servis.Deo;
@@ -45,12 +46,13 @@ public class ServisForma extends JFrame {
 	private ServisA citanje;
 	private ServisAutomobila servis;
 
+
 	
 	public ServisForma(ServisA citanje,ServisAutomobila servis) {
 		this.citanje = citanje;
 		this.servis = servis;
 		if(servis == null) {
-			setTitle("Dodavanje delova");
+			setTitle("Dodavanje servisa");
 		}else {
 			setTitle("Izmena podataka - "+servis.getOpis());
 		}
@@ -72,7 +74,7 @@ public class ServisForma extends JFrame {
 			cbServiser.addItem(String.valueOf(serviser.getIme().concat(serviser.getPrezime())));
 		}
 		for (Deo deo : citanje.sviNeobrisaniDelovi()) {
-			cbDeo.addItem(String.valueOf(deo.getNazivDela()));
+			cbDeo.addItem(deo.getId());
 		}
 		
 		if(servis != null) {
@@ -114,14 +116,17 @@ public class ServisForma extends JFrame {
 						Serviser serviser = citanje.pronadjiServisera(serviserCB2);
 						int termin =  Integer.parseInt(txtTermin.getText().trim());
 						String opis = txtOpis.getText().trim();	
-						String deoCB = cbDeo.getSelectedItem().toString();
-						Deo deo = citanje.pronadjiDeo(deoCB);
-						ArrayList<Deo>listaDelova = new ArrayList<Deo>();
-						listaDelova.add(deo);
+						String deoID = cbDeo.getSelectedItem().toString();
+						Deo deo = citanje.pronadjiDeo(deoID);
+						/*ArrayList<Deo>listaDelova = new ArrayList<Deo>();
+						listaDelova.add(deo);*/
 						StatusServisa status = (StatusServisa)cbStatusServisa.getSelectedItem();
 						
 						if(servis == null) {
-							ServisAutomobila novi = new ServisAutomobila(id, automobil, serviser, termin, opis, listaDelova,status, false);
+							ServisAutomobila novi = new ServisAutomobila(id, automobil, serviser, termin, opis,status, false);
+							if(deo != null) {
+								deo.getListaServisa().add(novi);
+								}
 							citanje.dodajServis(novi);
 						}else {
 							servis.setId(id);
@@ -129,8 +134,14 @@ public class ServisForma extends JFrame {
 							servis.setServiserSA(serviser);
 							servis.setTermin(termin);
 							servis.setOpis(opis);
-							servis.setListaDelova(listaDelova);
 							servis.setStatusServisa(status);
+							Deo stariDeo = citanje.pronadjiDeoS(servis);
+							if(stariDeo != null) {
+								stariDeo.getListaServisa().remove(servis);
+							}
+							if(deo != null) {
+								deo.getListaServisa().add(servis);
+							}
 						}
 						citanje.snimiServise();
 						ServisForma.this.dispose();
@@ -146,7 +157,10 @@ public class ServisForma extends JFrame {
 	}
 	private void popuniPolja() {
 		txtId.setText(String.valueOf(servis.getId()));
-		txtOpis.setText(servis.getOpis());	
+		txtOpis.setText(servis.getOpis());
+		Deo deo = citanje.pronadjiDeoS(servis);
+		cbDeo.setSelectedItem(deo.getId());
+		
 	}
 	public boolean validacija() {
 		boolean ok = true;

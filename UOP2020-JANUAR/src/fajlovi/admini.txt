@@ -1,1 +1,2 @@
-1|irina|kostic|2405996|0|adresaA|0692300008|irinaA|12345|1000.0|false
+1|irina|kostic|2405996|0|adresaA|692300008|irinaA|12345|1000.0|false
+2|stasa|kostic|16042011|0|adresaA|62555008|stasaA|12345|2000.0|false

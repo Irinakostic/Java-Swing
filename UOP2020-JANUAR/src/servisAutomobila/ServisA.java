@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+
 import korisnici.Admin;
 import korisnici.Korisnik.Pol;
 import korisnici.Musterija;
@@ -608,7 +610,14 @@ public void snimiAutobobile() {
 		return neobrisani;
 	}
 	
-	
+	public Deo pronadjiDeoS(ServisAutomobila sa) {
+		for (Deo deo: sviNeobrisaniDelovi()) {
+			if (deo.getListaServisa().contains(sa)) {
+				return deo;
+			}
+		}
+		return null;
+	}
 	
 public  ArrayList<Deo>ucitajDelove(){
 		
@@ -627,8 +636,8 @@ public  ArrayList<Deo>ucitajDelove(){
 				String naziv = lineSplit[3];
 				Double cena = Double.parseDouble(lineSplit[4]);
 				boolean obrisan = Boolean.parseBoolean(lineSplit[5]);
-				
-				Deo deo = new Deo(id, marka, model, naziv, cena,obrisan);
+				ArrayList<ServisAutomobila> listaServisa = new ArrayList<ServisAutomobila>();
+				Deo deo = new Deo(id, marka, model, naziv, cena,obrisan,listaServisa);
 				delovi.add(deo);
 				
 			}
@@ -682,11 +691,13 @@ public void snimiDelove() {
 	
 	public ArrayList<ServisAutomobila> sviNeobrisaniServisi() {
 		ArrayList<ServisAutomobila> neobrisani = new ArrayList<ServisAutomobila>();
-		for (ServisAutomobila servis : servisi) {
-			if(!servis.isObrisan()) {
-				neobrisani.add(servis);
+		for (Deo deo : delovi) {
+			for (ServisAutomobila servis : deo.getListaServisa()) {
+				if(!servis.isObrisan()) {
+					neobrisani.add(servis);
 			}
 		}
+	}
 		return neobrisani;
 	}
 	
@@ -699,6 +710,16 @@ public void snimiDelove() {
 		return null;
 	}
 
+	/*	public Kompozicija pronadjiKompoziciju(String naziv) {
+		for (Disk disk : diskovi) {
+			for(Kompozicija kompozicija : disk.getKompozicije()) {
+				if(kompozicija.getNaziv().equals(naziv)) {
+					return kompozicija;
+				}
+			}
+		}
+		return null;
+	}*/
 public ArrayList<ServisAutomobila>ucitajServise(){
 		
 		try {
@@ -715,20 +736,20 @@ public ArrayList<ServisAutomobila>ucitajServise(){
 				Serviser serviser = (Serviser)pronadjiServisera(intServiser);
 				int termin = Integer.parseInt(lineSplit[3]);
 				String opis = lineSplit[4];
-				
-				ArrayList<Deo> listaDelova = new ArrayList<Deo>();
-				
-				
 				int intStatusServisa = Integer.parseInt(lineSplit[5]);
 				StatusServisa statusServisa = StatusServisa.values()[intStatusServisa];
+				String deoID = lineSplit[7];
+				Deo d = (Deo) pronadjiDeo(deoID);
 				boolean obrisan = Boolean.parseBoolean(lineSplit[6]);
-				ServisAutomobila servis = new ServisAutomobila(id, auto, serviser, termin , opis, listaDelova ,statusServisa, obrisan);
+				ServisAutomobila servis = new ServisAutomobila(id, auto, serviser, termin , opis,statusServisa, obrisan);
 				if(auto==null) {
 					servis.setAutomobilSA(auto);
 				}
 				if(serviser!=null) {
 					servis.setServiserSA(serviser);
 				}
+				if (d != null) {
+					d.getListaServisa().add(servis);}
 				servisi.add(servis);
 			}
 			reader.close();
@@ -749,15 +770,16 @@ public ArrayList<ServisAutomobila>ucitajServise(){
 			
 			File file = new File("src/fajlovi/servisi.txt");
 			String content = "";
-			for (ServisAutomobila servis : servisi) {
+			for (Deo deo : delovi) {
+				for (ServisAutomobila servis : deo.getListaServisa()) {
 				content += servis.getId() + "|"
 						+ servis.getAutomobilSA().getId()+ "|"
 						+ servis.getServiserSA().getId() + "|"
 						+ servis.getTermin()+ "|"
 						+ servis.getOpis()+"|" 
-						+ servis.getListaDelova()+"|"
 						+ servis.getStatusServisa()+"|" 
 						+ servis.isObrisan() +  "\n";
+				}
 			}
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			writer.write(content);

@@ -2,6 +2,7 @@ package guiFromeZaDodavanjeiIzmene;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +15,7 @@ import net.miginfocom.swing.MigLayout;
 import servis.Deo;
 import servis.Marka;
 import servis.Model;
+import servis.ServisAutomobila;
 import servisAutomobila.ServisA;
 
 public class DeoForma extends JFrame {
@@ -90,10 +92,10 @@ public class DeoForma extends JFrame {
 						String naziv = txtNaziv.getText().trim();
 						Marka marka = (Marka)cbMarka.getSelectedItem();
 						Model model = (Model)cbModel.getSelectedItem();
-						Float cena = Float.parseFloat(txtCena.getText().trim());
+						Double cena = Double.parseDouble(txtCena.getText().trim());
 					
 						if(deo == null) {
-							Deo novi = new Deo(id, marka, model, naziv, cena, false);
+							Deo novi = new Deo(id, marka, model, naziv, cena, false, new ArrayList<ServisAutomobila>());
 							citanje.dodajDeo(novi);
 						}else {
 							deo.setId(id);

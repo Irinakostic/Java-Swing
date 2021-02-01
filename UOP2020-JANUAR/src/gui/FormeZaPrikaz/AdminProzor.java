@@ -110,6 +110,7 @@ public class AdminProzor extends JFrame {
 				af.setVisible(true);
 				
 			}
+			
 		});
 		btnEdit.addActionListener(new ActionListener() {
 			

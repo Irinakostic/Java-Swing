@@ -17,19 +17,17 @@ public class ServisAutomobila {
 	private Serviser serviserSA;
 	private int Termin;
 	private String opis;
-	private ArrayList<Deo>listaDelova;
 	private StatusServisa statusServisa;
 	private boolean obrisan;
 	
 	
 	public ServisAutomobila( String id, Automobil automobilSA, Serviser serviserSA, int termin, String opis,
-			ArrayList<Deo> listaDelova, StatusServisa statusServisa, boolean obrisan) {
+		StatusServisa statusServisa, boolean obrisan) {
 		this.id = id;
 		this.automobilSA = automobilSA;
 		this.serviserSA = serviserSA;
 		Termin = termin;
 		this.opis = opis;
-		this.listaDelova = listaDelova;
 		this.statusServisa = statusServisa;
 		this.obrisan = obrisan;
 	}
@@ -86,14 +84,6 @@ public class ServisAutomobila {
 	}
 
 
-	public ArrayList<Deo> getListaDelova() {
-		return listaDelova;
-	}
-
-
-	public void setListaDelova(ArrayList<Deo> listaDelova) {
-		this.listaDelova = listaDelova;
-	}
 
 
 	public StatusServisa getStatusServisa() {

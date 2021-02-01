@@ -119,7 +119,7 @@ public class MusterijaServisDodavanjeIzmene extends JFrame {
 						ArrayList<Deo>listaDelova = new ArrayList<Deo>();
 						
 						if(servis == null) {
-							ServisAutomobila novi = new ServisAutomobila(id, automobil, serviser, termin, opis, listaDelova, status, false);
+							ServisAutomobila novi = new ServisAutomobila(id, automobil, serviser, termin, opis, status, false);
 							citanje.dodajServis(novi);
 						}else {
 							servis.setId(id);

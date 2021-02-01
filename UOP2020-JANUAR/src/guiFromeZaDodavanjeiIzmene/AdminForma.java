@@ -107,7 +107,7 @@ public class AdminForma extends JFrame {
 					int telefon = Integer.parseInt(txtTelefon.getText().trim());
 					String korisnickoIme = txtKorisnickoIme.getText().trim();
 					String lozinka = new String(pfLozinka.getPassword()).trim();
-					Float plata = Float.parseFloat(txtPlata.getText().trim());
+					Double plata = Double.parseDouble(txtPlata.getText().trim());
 					
 					
 					if(admin == null) {

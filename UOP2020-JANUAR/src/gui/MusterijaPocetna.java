@@ -19,12 +19,12 @@ public class MusterijaPocetna extends JFrame {
 	private JMenuItem servisItem = new JMenuItem("Zakazi servis");
 	
 	private ServisA citanje;
-	private Musterija prijavljenaMusterija;
+	private Musterija ulogovanaMusterija;
 	
 	
 	public MusterijaPocetna(ServisA citanje,Musterija prijavljenaMusterija) {
 		this.citanje = citanje;
-		this.prijavljenaMusterija = prijavljenaMusterija;
+		this.ulogovanaMusterija = prijavljenaMusterija;
 		setTitle("Prijavljen korisnik: "+prijavljenaMusterija.getIme()+" "+prijavljenaMusterija.getPrezime());
 		setSize(500, 500);
 		setResizable(false);
@@ -42,7 +42,7 @@ public class MusterijaPocetna extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MusterijaServisProzor msp = new MusterijaServisProzor(citanje,prijavljenaMusterija);
+				MusterijaServisProzor msp = new MusterijaServisProzor(citanje, ulogovanaMusterija);
 				msp.setVisible(true);
 				
 			}

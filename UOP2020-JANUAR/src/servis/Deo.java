@@ -1,5 +1,7 @@
 package servis;
 
+import java.util.ArrayList;
+
 public class Deo {
 	
 
@@ -10,19 +12,34 @@ public class Deo {
 	private String nazivDela;
 	private double cena;
 	private boolean obrisan;
-	
-	
+	private ArrayList<ServisAutomobila>listaServisa;
 	
 
-	public Deo( String id, Marka marka, Model model, String nazivDela, double cena, boolean obrisan) {
-		super();
+	
+
+	public Deo(String id, Marka marka, Model model, String nazivDela, double cena, boolean obrisan,
+			ArrayList<ServisAutomobila> listaServisa) {
 		this.id = id;
 		this.marka = marka;
 		this.model = model;
 		this.nazivDela = nazivDela;
 		this.cena = cena;
 		this.obrisan = obrisan;
+		this.listaServisa = listaServisa;
 	}
+
+
+
+	public ArrayList<ServisAutomobila> getListaServisa() {
+		return listaServisa;
+	}
+
+
+
+	public void setListaServisa(ArrayList<ServisAutomobila> listaServisa) {
+		this.listaServisa = listaServisa;
+	}
+
 
 
 	public  String getId() {
